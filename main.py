@@ -31,6 +31,10 @@ if __name__ == "__main__":
             except Exception as e:
                 continue
 
+            minted_language = str(filename.split(".")[1])
+            if minted_language == "py":
+                minted_language = "python"
+
             latex_output = latex_output + "        \\subsubsection{"+(filepath.replace(root_path+"\\src\\", "")).replace("\\", "/")+"} \label{"+filename.lower().replace(".", "_")+"}\n" \
                                           "\n" \
                                           "        \\begin{longlisting}\n" \
@@ -40,7 +44,7 @@ if __name__ == "__main__":
                                           "                baselinestretch=1,\n" \
                                           "                breaklines,\n" \
                                           "                breakanywhere\n" \
-                                          "            ]{"+str(filename.split(".")[1])+"}\n" \
+                                          "            ]{"+minted_language+"}\n" \
 
 
             latex_output = latex_output + file_code
