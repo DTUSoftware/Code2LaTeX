@@ -1,8 +1,17 @@
 import os
+import sys
 import pyperclip
 
 if __name__ == "__main__":
-    root_path = os.path.dirname(os.path.realpath(__file__))
+    root_path = None
+    # Read path from given command-line argument
+    if len(sys.argv) > 0:
+        arg_path = ' '.join(sys.argv[1:])
+        if os.path.exists(arg_path):
+            root_path = arg_path
+    # If no argument was given, use base directory
+    if not root_path:
+        root_path = os.path.dirname(os.path.realpath(__file__))
     pathname = os.path.join(root_path, "src")
 
     latex_output = "    \\subsection{Code} \label{code}\n\n"
