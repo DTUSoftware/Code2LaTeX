@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     for root, dirs, files in os.walk(pathname, topdown=True):
         for filename in files:
-            if filename.split(".")[1] in ["png", "svg", "puml", "gitignore", "properties"]:
+            if "." not in filename or filename.split(".")[1] in ["png", "svg", "puml", "gitignore", "properties"]:
                 continue
 
             filepath = os.path.join(root, filename)
@@ -39,17 +39,12 @@ if __name__ == "__main__":
                                           "\n" \
                                           "        \\begin{longlisting}\n" \
                                           "            \\centering\n" \
-                                          "            \\begin{minted}[\n" \
+                                          "            \\inputminted[\n" \
                                           "                framesep=4mm,\n" \
                                           "                baselinestretch=1,\n" \
                                           "                breaklines,\n" \
                                           "                breakanywhere\n" \
-                                          "            ]{"+minted_language+"}\n" \
-
-
-            latex_output = latex_output + file_code
-
-            latex_output = latex_output + "            \\end{minted}\n" \
+                                          "            ]{"+minted_language+"}{project_files/"+(filepath.replace(root_path+"\\src\\", "")).replace("\\", "/")+"}\n" \
                                           "            \\caption{"+filename+"}\n" \
                                           "            \\label{lst:"+filename.lower().replace(".", "_")+"}\n" \
                                           "        \\end{longlisting}\n" \
