@@ -39,8 +39,12 @@ if __name__ == "__main__":
                 minted_language = "python"
             elif minted_language == "h":
                 minted_language = "c"
+            elif minted_language == "yml":
+                minted_language = "yaml"
             elif minted_language == "txt":
                 minted_language = "text"
+			elif minted_language in ["conf", "service", "db"]:
+				minted_language = "text"
 
             filepath_document = (filepath.replace(pathname, "")).replace("\\", "/")
             if filepath_document.startswith("/"):
